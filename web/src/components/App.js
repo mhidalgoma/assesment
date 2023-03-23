@@ -1,6 +1,29 @@
 import '../styles/App.scss';
+import { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleName = (ev) => {
+    setName(ev.target.value);
+  };
+  const handleEmail = (ev) => {
+    setEmail(ev.target.value);
+  };
+  const handlePhone = (ev) => {
+    setPhone(ev.target.value);
+  };
+  const handleMessage = (ev) => {
+    setMessage(ev.target.value);
+  };
+  const handleSubmit = (ev) => {
+    // Aquí detenemos el envío del formulario
+    ev.preventDefault();
+    // Aquí enviamos los datos al servidor con un fetch o lo que sea
+  };
   return (
     <div>
       <header>
@@ -19,12 +42,36 @@ function App() {
         <h1>Get in touch</h1>
         <div></div>
         <div></div>
-        <form>
-          <input type="text" placeholder="Complete Name" name="name" />
-          <input type="text" placeholder="Email" name="email" />
-          <input type="tel" placeholder="phone" name="phone" />
-          <input type="text" placeholder="Message" name="message" />
-          <button type="submit">Submit</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Complete Name"
+            name="name"
+            onChange={handleName}
+            value={name}
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            name="email"
+            onChange={handleEmail}
+            value={email}
+          />
+          <input
+            type="tel"
+            placeholder="phone"
+            name="phone"
+            onChange={handlePhone}
+            value={phone}
+          />
+          <input
+            type="text"
+            placeholder="Message"
+            name="message"
+            onChange={handleMessage}
+            value={message}
+          />
+          <input type="submit" value="Submit" />
         </form>
       </main>
       <footer>
@@ -55,6 +102,6 @@ function App() {
       </footer>
     </div>
   );
-}
+};
 
 export default App;

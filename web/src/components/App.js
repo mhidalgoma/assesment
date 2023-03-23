@@ -1,28 +1,68 @@
 import '../styles/App.scss';
 import { useState } from 'react';
+import apiData from '../services/api-data';
 
 const App = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
+  const [dataFromForm, setDataFromForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  //const [apiMessage, setApiMessage] = useState('');
 
-  const handleName = (ev) => {
-    setName(ev.target.value);
+  const handleInput = (ev) => {
+    console.log('entra en el handle');
+    const objInput = ev.target;
+    let inputValue = objInput.value;
+    const inputName = objInput.name;
+    console.log(objInput.value);
+    console.log(objInput.name);
+
+    // if (inputName === 'phone') {
+    //   const regExPhone = /[6-9]{1}[0-9]{8}/; //Se añade una comprobación para que vea si el valor del teléfono cumple con la expresión regular dada
+    //   if (regExPhone.test(inputValue) || inputValue === '') {
+    //     setErrorPhone(false);
+    //   } else {
+    //     //Si el valor no cumple con la expresión regular es visible el siguiente mensaje
+    //     setErrorPhone(true);
+    //   }
+    // } else if (inputName === 'email') {
+    //   const regExEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; //Se añade una comprobación para que vea si el valor del teléfono cumple con la expresión regular dada
+    //   if (regExEmail.test(inputValue) || inputValue === '') {
+    //     setErrorEmail(false);
+    //   } else {
+    //     //Si el valor no cumple con la expresión regular es visible el siguiente mensaje
+    //     setErrorEmail(true);
+    //   }
+    // }
+    setDataFromForm({ ...dataFromForm, [inputName]: inputValue });
   };
-  const handleEmail = (ev) => {
-    setEmail(ev.target.value);
-  };
-  const handlePhone = (ev) => {
-    setPhone(ev.target.value);
-  };
-  const handleMessage = (ev) => {
-    setMessage(ev.target.value);
+
+  // const renderApiMessage = () => {
+  //   if (apiMessage !== '') {
+  //     return <p>{apiMessage}</p>;
+  //   }
+  // };
+
+  const sendDataToApi = (data) => {
+    apiData.sendDataToApi(data).then((response) => {
+      if (response) {
+        console.log('Success!');
+        console.log(response);
+
+        //setApiMessage('Data brought from API successfully');
+      } else {
+        //setApiMessage("We couldn't get data from API ");
+        console.log('Failure');
+      }
+    });
   };
   const handleSubmit = (ev) => {
     // Aquí detenemos el envío del formulario
     ev.preventDefault();
     // Aquí enviamos los datos al servidor con un fetch o lo que sea
+    sendDataToApi(dataFromForm);
   };
   return (
     <div>
@@ -47,54 +87,55 @@ const App = () => {
             type="text"
             placeholder="Complete Name"
             name="name"
-            onChange={handleName}
-            value={name}
+            onChange={handleInput}
+            value={dataFromForm.name}
           />
           <input
             type="text"
             placeholder="Email"
             name="email"
-            onChange={handleEmail}
-            value={email}
+            onChange={handleInput}
+            value={dataFromForm.email}
           />
           <input
             type="tel"
             placeholder="phone"
             name="phone"
-            onChange={handlePhone}
-            value={phone}
+            onChange={handleInput}
+            value={dataFromForm.phone}
           />
           <input
             type="text"
             placeholder="Message"
             name="message"
-            onChange={handleMessage}
-            value={message}
+            onChange={handleInput}
+            value={dataFromForm.message}
           />
           <input type="submit" value="Submit" />
         </form>
+        {/* {renderApiMessage()} */}
       </main>
       <footer>
         <nav>
           <ul>
             <li>
               <a href="https://www.facebook.com/mediasmartmb/">
-                <i class="fa-brands fa-square-facebook"></i>
+                <i className="fa-brands fa-square-facebook"></i>
               </a>
             </li>
             <li>
               <a href="https://www.linkedin.com/company/mediasmart-mobile/">
-                <i class="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-linkedin"></i>
               </a>
             </li>
             <li>
               <a href="https://twitter.com/mediasmartio">
-                <i class="fa-brands fa-square-twitter"></i>
+                <i className="fa-brands fa-square-twitter"></i>
               </a>
             </li>
             <li>
               <a href="https://www.youtube.com/channel/UCMkb1sSXEaxpzJ4fqmJMHQg">
-                <i class="fa-brands fa-square-youtube"></i>
+                <i className="fa-brands fa-square-youtube"></i>
               </a>
             </li>
           </ul>

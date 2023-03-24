@@ -7,8 +7,8 @@ const sendDataToApi = (data) => {
     },
   })
     .then((response) => response.json())
-    .then((dataObject) => {
-      return dataObject;
+    .then((dataObj) => {
+      return dataObj;
     });
 };
 

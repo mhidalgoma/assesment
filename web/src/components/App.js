@@ -9,15 +9,11 @@ const App = () => {
     phone: '',
     message: '',
   });
-  //const [apiMessage, setApiMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInput = (ev) => {
-    console.log('entra en el handle');
-    const objInput = ev.target;
-    let inputValue = objInput.value;
-    const inputName = objInput.name;
-    console.log(objInput.value);
-    console.log(objInput.name);
+    const inputValue = ev.target.value;
+    const inputName = ev.target.name;
 
     // if (inputName === 'phone') {
     //   const regExPhone = /[6-9]{1}[0-9]{8}/; //Se añade una comprobación para que vea si el valor del teléfono cumple con la expresión regular dada
@@ -37,13 +33,14 @@ const App = () => {
     //   }
     // }
     setDataFromForm({ ...dataFromForm, [inputName]: inputValue });
+    setErrorMessage('');
   };
 
-  // const renderApiMessage = () => {
-  //   if (apiMessage !== '') {
-  //     return <p>{apiMessage}</p>;
-  //   }
-  // };
+  const renderErrorMessage = () => {
+    if (errorMessage !== '') {
+      return <p>{errorMessage}</p>;
+    }
+  };
 
   const sendDataToApi = (data) => {
     apiData.sendDataToApi(data).then((response) => {
@@ -62,7 +59,25 @@ const App = () => {
     // Aquí detenemos el envío del formulario
     ev.preventDefault();
     // Aquí enviamos los datos al servidor con un fetch o lo que sea
-    sendDataToApi(dataFromForm);
+    const regExEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    const regExPhone = /[6-9]{1}[0-9]{8}/;
+    if (dataFromForm.name.length < 4) {
+      setErrorMessage('Must enter a valid name (more than three characters).');
+    } else if (
+      dataFromForm.email === '' ||
+      !regExEmail.test(dataFromForm.email)
+    ) {
+      setErrorMessage('Must enter a valid email.');
+    } else if (!regExPhone.test(dataFromForm.phone)) {
+      setErrorMessage('Must enter a valid phone.');
+    } else if (dataFromForm.message.length < 11) {
+      setErrorMessage(
+        'You need to write a valid message (more than three characters).'
+      );
+    } else {
+      setErrorMessage('Submitted!');
+      sendDataToApi(dataFromForm);
+    }
   };
   return (
     <div>
@@ -85,14 +100,14 @@ const App = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Complete Name"
+            placeholder="Name *"
             name="name"
             onChange={handleInput}
             value={dataFromForm.name}
           />
           <input
             type="text"
-            placeholder="Email"
+            placeholder="Email *"
             name="email"
             onChange={handleInput}
             value={dataFromForm.email}
@@ -106,14 +121,14 @@ const App = () => {
           />
           <input
             type="text"
-            placeholder="Message"
+            placeholder="Message *"
             name="message"
             onChange={handleInput}
             value={dataFromForm.message}
           />
           <input type="submit" value="Submit" />
         </form>
-        {/* {renderApiMessage()} */}
+        {renderErrorMessage()}
       </main>
       <footer>
         <nav>

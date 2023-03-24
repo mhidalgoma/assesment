@@ -8,32 +8,25 @@ const App = () => {
     email: '',
     phone: '',
     message: '',
+    title: 'none',
   });
   const [errorMessage, setErrorMessage] = useState('');
+  const [titleChecked, setTitleChecked] = useState('no');
 
   const handleInput = (ev) => {
     const inputValue = ev.target.value;
     const inputName = ev.target.name;
-
-    // if (inputName === 'phone') {
-    //   const regExPhone = /[6-9]{1}[0-9]{8}/; //Se añade una comprobación para que vea si el valor del teléfono cumple con la expresión regular dada
-    //   if (regExPhone.test(inputValue) || inputValue === '') {
-    //     setErrorPhone(false);
-    //   } else {
-    //     //Si el valor no cumple con la expresión regular es visible el siguiente mensaje
-    //     setErrorPhone(true);
-    //   }
-    // } else if (inputName === 'email') {
-    //   const regExEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; //Se añade una comprobación para que vea si el valor del teléfono cumple con la expresión regular dada
-    //   if (regExEmail.test(inputValue) || inputValue === '') {
-    //     setErrorEmail(false);
-    //   } else {
-    //     //Si el valor no cumple con la expresión regular es visible el siguiente mensaje
-    //     setErrorEmail(true);
-    //   }
-    // }
     setDataFromForm({ ...dataFromForm, [inputName]: inputValue });
     setErrorMessage('');
+  };
+  const handleCheckbox = (ev) => {
+    if (ev.target.checked) {
+      setTitleChecked('yes');
+      setDataFromForm({ ...dataFromForm, title: 'Mr.' });
+    } else {
+      setTitleChecked('no');
+      setDataFromForm({ ...dataFromForm, title: 'none' });
+    }
   };
 
   const renderErrorMessage = () => {
@@ -41,24 +34,31 @@ const App = () => {
       return <p>{errorMessage}</p>;
     }
   };
-
+  const renderSelectTitle = () => {
+    if (titleChecked === 'yes') {
+      return (
+        <select name="titles" id="titles" onChange={handleTitles}>
+          <option value="Mr.">Mr.</option>
+          <option value="Mrs.">Mrs.</option>
+        </select>
+      );
+    }
+  };
+  const handleTitles = (ev) => {
+    setDataFromForm({ ...dataFromForm, title: ev.target.value });
+  };
   const sendDataToApi = (data) => {
     apiData.sendDataToApi(data).then((response) => {
       if (response) {
-        console.log('Success!');
+        console.log('Data brought from API successfully!');
         console.log(response);
-
-        //setApiMessage('Data brought from API successfully');
       } else {
-        //setApiMessage("We couldn't get data from API ");
-        console.log('Failure');
+        console.log("We couldn't get data from API");
       }
     });
   };
   const handleSubmit = (ev) => {
-    // Aquí detenemos el envío del formulario
     ev.preventDefault();
-    // Aquí enviamos los datos al servidor con un fetch o lo que sea
     const regExEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
     const regExPhone = /[6-9]{1}[0-9]{8}/;
     if (dataFromForm.name.length < 4) {
@@ -98,6 +98,15 @@ const App = () => {
         <div></div>
         <div></div>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="title">Add title</label>
+          <input
+            type="checkbox"
+            id="title"
+            name="title"
+            value="title"
+            onChange={handleCheckbox}
+          />
+          {renderSelectTitle()}
           <input
             type="text"
             placeholder="Name *"

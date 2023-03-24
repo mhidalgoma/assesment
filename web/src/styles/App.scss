@@ -2,55 +2,67 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
   font: inherit;
 }
-
 ul {
   list-style: none;
 }
-//HEADER
 .header {
   height: 13vh;
+  min-height: 70px;
+  min-width: 1000px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 70px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
   &__logo {
     height: 70%;
   }
   &__menu {
     display: flex;
-    gap: 30px;
     align-items: center;
+    &--regular {
+      margin-right: 30px;
+    }
     &--border {
-      border: 2px solid #0255a7;
+      margin-right: 10px;
+      border: 1px solid #0255a7;
       color: #0255a7;
-      padding: 7px 15px;
+      padding: 5px 15px;
       border-radius: 50px;
+    }
+    &--border:hover {
+      color: #ed3950;
+      cursor: pointer;
     }
   }
 }
-//MAIN
 .main {
   height: 77vh;
+  min-height: 500px;
+  min-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
   &__title {
-    font-size: 40px;
+    font-size: 48px;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     margin-top: 25px;
   }
   &__line1 {
     background-color: #ed3950;
-    width: 160px;
+    width: 185px;
     height: 7px;
     border-radius: 5px;
-    margin: 20px 0px 7px 0px;
+    margin: 10px 0px 7px 0px;
   }
   &__line2 {
     background-color: #225ba8;
-    width: 115px;
+    width: 135px;
     height: 7px;
     border-radius: 5px;
     margin-bottom: 30px;
@@ -80,7 +92,7 @@ ul {
       padding: 0px 20px;
     }
     &--name {
-      height: 50px;
+      height: 45px;
       background-color: #f9f9fa;
       border: 2px solid #ededed;
       border-radius: 50px;
@@ -92,7 +104,7 @@ ul {
     display: flex;
     justify-content: space-between;
     &--email {
-      height: 50px;
+      height: 45px;
       background-color: #f9f9fa;
       border: 2px solid #ededed;
       border-radius: 50px;
@@ -100,7 +112,7 @@ ul {
       width: 63%;
     }
     &--phone {
-      height: 50px;
+      height: 45px;
       background-color: #f9f9fa;
       border: 2px solid #ededed;
       border-radius: 50px;
@@ -137,10 +149,10 @@ ul {
       box-shadow: 8px 8px #d4dfef;
       transition: box-shadow 0.5s ease-out;
     }
-  }
-
-  &__btn:hover {
-    box-shadow: 0px 0px #d4dfef;
+    &--btn:hover {
+      box-shadow: 0px 0px #d4dfef;
+      cursor: pointer;
+    }
   }
 }
 .error-msg {
@@ -148,10 +160,10 @@ ul {
   font-style: italic;
 }
 
-//FOOTER
-
 .footer {
   height: 10vh;
+  min-height: 50px;
+  min-width: 1000px;
   display: flex;
   justify-content: center;
   border-top: 2px solid #e4e7eb;

@@ -1,5 +1,5 @@
 {
-  "name": "mediasmart-asessment",
+  "name": "mediasmart-assessment",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
   "author": "Monica-Hidalgo",
   "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^8.0.1",
     "cors": "^2.8.5",
     "ejs": "^3.1.8",
     "express": "^4.17.1"

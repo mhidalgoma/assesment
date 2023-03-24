@@ -89,9 +89,9 @@ const App = () => {
         />
         <nav className="header__nav">
           <ul className="header__menu">
-            <li>SOLUTIONS</li>
-            <li>RESOURCES</li>
-            <li>ABOUT US</li>
+            <li className="header__menu--regular">SOLUTIONS</li>
+            <li className="header__menu--regular">RESOURCES</li>
+            <li className="header__menu--regular">ABOUT US</li>
             <li className="header__menu--border">LOG IN</li>
             <li className="header__menu--border">SIGN UP</li>
           </ul>
@@ -153,7 +153,6 @@ const App = () => {
             value={dataFromForm.message}
           />
           <div className="form__fourth">
-            {/* {renderErrorMessage()} */}
             <p className="error-msg">{errorMessage}</p>
             <input className="form__fourth--btn" type="submit" value="Submit" />
           </div>
@@ -163,22 +162,38 @@ const App = () => {
         <nav className="footer__nav">
           <ul className="footer__nav--media">
             <li>
-              <a href="https://www.facebook.com/mediasmartmb/">
+              <a
+                href="https://www.facebook.com/mediasmartmb/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-square-facebook"></i>
               </a>
             </li>
             <li>
-              <a href="https://www.linkedin.com/company/mediasmart-mobile/">
+              <a
+                href="https://www.linkedin.com/company/mediasmart-mobile/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-linkedin"></i>
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/mediasmartio">
+              <a
+                href="https://twitter.com/mediasmartio"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-square-twitter"></i>
               </a>
             </li>
             <li>
-              <a href="https://www.youtube.com/channel/UCMkb1sSXEaxpzJ4fqmJMHQg">
+              <a
+                href="https://www.youtube.com/channel/UCMkb1sSXEaxpzJ4fqmJMHQg"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-square-youtube"></i>
               </a>
             </li>

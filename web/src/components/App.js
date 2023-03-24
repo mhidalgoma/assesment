@@ -72,7 +72,7 @@ const App = () => {
       setErrorMessage('Must enter a valid phone.');
     } else if (dataFromForm.message.length < 11) {
       setErrorMessage(
-        'You need to write a valid message (more than three characters).'
+        'You need to write a valid message (more than ten characters).'
       );
     } else {
       setErrorMessage('Submitted!');

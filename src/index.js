@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const Database = require('better-sqlite3');
 const { response } = require('express');
 
 const server = express();

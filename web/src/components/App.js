@@ -29,15 +29,15 @@ const App = () => {
     }
   };
 
-  const renderErrorMessage = () => {
-    if (errorMessage !== '') {
-      return <p>{errorMessage}</p>;
-    }
-  };
   const renderSelectTitle = () => {
     if (titleChecked === 'yes') {
       return (
-        <select name="titles" id="titles" onChange={handleTitles}>
+        <select
+          className="form__first--title"
+          name="titles"
+          id="titles"
+          onChange={handleTitles}
+        >
           <option value="Mr.">Mr.</option>
           <option value="Mrs.">Mrs.</option>
         </select>
@@ -81,67 +81,87 @@ const App = () => {
   };
   return (
     <div>
-      <header>
-        <img src="./mediasmart_logo.png" alt="Mediasmart logo" />
-        <nav>
-          <ul>
+      <header className="header">
+        <img
+          className="header__logo"
+          src="./mediasmart_logo.png"
+          alt="Mediasmart logo"
+        />
+        <nav className="header__nav">
+          <ul className="header__menu">
             <li>SOLUTIONS</li>
             <li>RESOURCES</li>
             <li>ABOUT US</li>
-            <li>LOG IN</li>
-            <li>SIGN UP</li>
+            <li className="header__menu--border">LOG IN</li>
+            <li className="header__menu--border">SIGN UP</li>
           </ul>
         </nav>
       </header>
-      <main>
-        <h1>Get in touch</h1>
-        <div></div>
-        <div></div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Add title</label>
-          <input
-            type="checkbox"
-            id="title"
-            name="title"
-            value="title"
-            onChange={handleCheckbox}
-          />
-          {renderSelectTitle()}
-          <input
+      <main className="main">
+        <h1 className="main__title">Get in touch</h1>
+        <div className="main__line1"></div>
+        <div className="main__line2"></div>
+        <form className="form" id="form" onSubmit={handleSubmit}>
+          <div className="form__first">
+            <div className="form__first--check">
+              <label className="form__first--check-label" htmlFor="title">
+                Add title
+              </label>
+              <input
+                className="form__first--check-box"
+                type="checkbox"
+                id="title"
+                name="title"
+                value="title"
+                onChange={handleCheckbox}
+              />
+            </div>
+            {renderSelectTitle()}
+            <input
+              className="form__first--name"
+              type="text"
+              placeholder="Name*"
+              name="name"
+              onChange={handleInput}
+              value={dataFromForm.name}
+            />
+          </div>
+          <div className="form__second">
+            <input
+              className="form__second--email"
+              type="text"
+              placeholder="Email*"
+              name="email"
+              onChange={handleInput}
+              value={dataFromForm.email}
+            />
+            <input
+              className="form__second--phone"
+              type="tel"
+              placeholder="Phone number"
+              name="phone"
+              onChange={handleInput}
+              value={dataFromForm.phone}
+            />
+          </div>
+          <textarea
+            className="form__third"
             type="text"
-            placeholder="Name *"
-            name="name"
-            onChange={handleInput}
-            value={dataFromForm.name}
-          />
-          <input
-            type="text"
-            placeholder="Email *"
-            name="email"
-            onChange={handleInput}
-            value={dataFromForm.email}
-          />
-          <input
-            type="tel"
-            placeholder="phone"
-            name="phone"
-            onChange={handleInput}
-            value={dataFromForm.phone}
-          />
-          <input
-            type="text"
-            placeholder="Message *"
+            placeholder="Message*"
             name="message"
             onChange={handleInput}
             value={dataFromForm.message}
           />
-          <input type="submit" value="Submit" />
+          <div className="form__fourth">
+            {/* {renderErrorMessage()} */}
+            <p className="error-msg">{errorMessage}</p>
+            <input className="form__fourth--btn" type="submit" value="Submit" />
+          </div>
         </form>
-        {renderErrorMessage()}
       </main>
-      <footer>
-        <nav>
-          <ul>
+      <footer className="footer">
+        <nav className="footer__nav">
+          <ul className="footer__nav--media">
             <li>
               <a href="https://www.facebook.com/mediasmartmb/">
                 <i className="fa-brands fa-square-facebook"></i>
